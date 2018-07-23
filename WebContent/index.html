@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title></title>
+
+<script
+	src="http://crypto-js.googlecode.com/svn/tags/3.1.2/build/components/enc-base64-min.js"></script>
+<script>
+	var lib_crypt = require('aes');
+	$.loginButton
+			.addEventListener(
+					'click',
+					function(e) {
+						var key = lib_crypt.CryptoJS.enc.Hex
+								.parse('bcb04b7e103a0cd8b54763051cef08bc55abe029fdebae5e1d417e2ffb2a00a3');
+						var iv = lib_crypt.CryptoJS.enc.Hex
+								.parse('101112131415161718191a1b1c1d1e1f');
+						var encrypted = lib_crypt.CryptoJS.AES.encrypt(
+								$.passwordInput.value, key, {
+									iv : iv
+								});
+						var password_base64 = encrypted.ciphertext
+								.toString(lib_crypt.CryptoJS.enc.Base64);
+						return password_base64;
+					});
+
+	function funcao1() {
+		alert("Eu sou um alert!");
+		
+		var encrypted = CryptoJS.AES.encrypt("#string#", "#theKey#");
+		console.log(encrypted.toString());
+		var decrypted = CryptoJS.AES.decrypt(encrypted, "#theKey#");
+		console.log(decrypted.toString(CryptoJS.enc.Utf8));
+	}
+
+	function myFunction() {
+		var x;
+
+		var idade = prompt("Digite sua idade:");
+
+		if (idade != null) {
+			x = "Idade: " + idade + " anos.";
+			document.getElementById("demo").innerHTML = x;
+		}
+	}
+
+</script>
+
+</head>
+<body>
+
+	<h1>PAGINA DE TESTE</h1>
+
+	<input type="button" onclick="funcao1()" value="Exibir Alert" />
+
+	<p>Clique para exibir.</p>
+
+	<button onclick="myFunction()">Clique aqui</button>
+
+	<p id="demo"></p>
+
+</body>
+</html>
