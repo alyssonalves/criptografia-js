@@ -4,46 +4,58 @@
 <title></title>
 
 <script
-	src="http://crypto-js.googlecode.com/svn/tags/3.1.2/build/components/enc-base64-min.js"></script>
-<script>
-	var lib_crypt = require('aes');
-	$.loginButton
-			.addEventListener(
-					'click',
-					function(e) {
-						var key = lib_crypt.CryptoJS.enc.Hex
-								.parse('bcb04b7e103a0cd8b54763051cef08bc55abe029fdebae5e1d417e2ffb2a00a3');
-						var iv = lib_crypt.CryptoJS.enc.Hex
-								.parse('101112131415161718191a1b1c1d1e1f');
-						var encrypted = lib_crypt.CryptoJS.AES.encrypt(
-								$.passwordInput.value, key, {
-									iv : iv
-								});
-						var password_base64 = encrypted.ciphertext
-								.toString(lib_crypt.CryptoJS.enc.Base64);
-						return password_base64;
-					});
+	src="http://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/aes.js"></script>
 
+
+<script>
 	function funcao1() {
 		alert("Eu sou um alert!");
-		
-		var encrypted = CryptoJS.AES.encrypt("#string#", "#theKey#");
-		console.log(encrypted.toString());
-		var decrypted = CryptoJS.AES.decrypt(encrypted, "#theKey#");
-		console.log(decrypted.toString(CryptoJS.enc.Utf8));
+
+		var string = 'Lorem ipsum dolor sit amet, ...';
+		var password = 'my-password';
+		var encrypted = CryptoJS.AES.encrypt(string, password);
+		document.getElementById("encrypted").innerHTML = encrypted;
+
+		var decrypted = CryptoJS.AES.decrypt(encrypted, password);
+		document.getElementById("decrypted").innerHTML = decrypted;
+
 	}
 
 	function myFunction() {
 		var x;
+		var y;
+		var z;
+		''
+		var valor = prompt("Digite sua idade:");
 
-		var idade = prompt("Digite sua idade:");
+		if (valor != null) {
+			x = "Valor Original: " + valor;
+			y = "Valor Criptografado: " + valor;
+			z = "Valor Original retorno: " + valor;
 
-		if (idade != null) {
-			x = "Idade: " + idade + " anos.";
 			document.getElementById("demo").innerHTML = x;
+			document.getElementById("demo1").innerHTML = y;
+			document.getElementById("demo2").innerHTML = z;
 		}
 	}
 
+	function crip() {
+		
+		var valor = prompt("Digite sua idade:");
+
+		//INIT
+		var myString = "Aysson Alves";
+		var myPassword = "1234567890";
+
+		// PROCESS
+		var encrypted = CryptoJS.AES.encrypt(myString, myPassword);
+		var decrypted = CryptoJS.AES.decrypt(encrypted, myPassword);
+		document.getElementById("demo0").innerHTML = myString;
+		document.getElementById("demo1").innerHTML = encrypted;
+		document.getElementById("demo2").innerHTML = decrypted;
+		document.getElementById("demo3").innerHTML = decrypted.toString(CryptoJS.enc.Utf8);
+
+	}
 </script>
 
 </head>
@@ -57,7 +69,19 @@
 
 	<button onclick="myFunction()">Clique aqui</button>
 
+	<button onclick="funcao1()">Funcao 1</button>
+
 	<p id="demo"></p>
+	<p id="demo1"></p>
+	<p id="demo2"></p>
+
+	<p id="encrypted"></p>
+
+	<p id="decrypted"></p>
+
+
+
+
 
 </body>
 </html>
